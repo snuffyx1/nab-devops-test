@@ -1,0 +1,9 @@
+FROM centos:7
+RUN rpmkeys --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 && yum update -y --nogpgcheck
+RUN yum install epel-release -y --nogpgcheck
+RUN yum install nginx -y --nogpgcheck
+COPY nginx.conf /etc/nginx/
+COPY daf.html /usr/share/nginx/html/
+EXPOSE 8443
+STOPSIGNAL SIGTERM
+CMD ["nginx", "-g", "daemon off;"]
