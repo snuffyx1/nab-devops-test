@@ -9,7 +9,7 @@ counter=0
 ### Look for jq in the system and install it if not present
 if ! [ -x "$(command -v jq)" >/dev/null 2>&1 ]; then
     echo "jq is not installed. Installing it now."
-    yum install jq >/dev/null
+    yum install -y jq >/dev/null
 fi
 
 #Cloning the git repository
