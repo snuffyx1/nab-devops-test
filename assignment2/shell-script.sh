@@ -13,7 +13,7 @@ if ! [ -x "$(command -v jq)" >/dev/null 2>&1 ]; then
 fi
 
 #Cloning the git repository
-git clone --depth 2 --branch $3 $1 && baseFolder=$(basename $1 .git) 2>&1
+git clone $1 && baseFolder=$(basename $1 .git) 2>&1
 if [ $? ]; then
     echo -e "Successfully cloned $1\n" && cd $baseFolder
 else
@@ -23,6 +23,7 @@ fi
 
 #Comparing the differences between 2 tags and display the file names
 echo -e "Comparing repository for tags $2 $3 \nThe list of files with differences are,"
+git checkout $3 >/dev/null
 git diff $2 $3 --name-only
 
 #Listing files excluding files start with "excl"
